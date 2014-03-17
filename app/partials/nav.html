@@ -1,0 +1,34 @@
+<div>
+	<select id="year" ng-model="yearFilter.year" ng-change="changeYear()" ng_options="year for year in data.years track by year"></select>
+	<select id="view" ng-model="viewSelection.view" ng-change="changeView()">
+		<optgroup label="Monthly">
+			<option value="monthly/summary">Summary</option>
+			<option value="monthly/generation">Generation</option>
+			<option value="monthly/usage">Usage by circuit</option>
+			<option value="monthly/hdd">Heating Degree Days</option>
+			<option value="monthly/water">Water Usage</option>
+			<option value="monthly/basetemp">Base Temp Analysis</option>
+		</optgroup>
+		<optgroup label="Daily">
+			<option id="adjusted" value="daily/netusage">Net Usage</option>
+			<option id="solar" value="daily/generation">Generation</option>
+			<option id="usage" value="daily/usage">Usage</option>
+			<optgroup id="circuits" label="Daily Usage by Circuit">
+				<option id="usage-ashp" value="daily/usage/ashp">ASHP</option>
+				<option id="usage-dwh" value="daily/usage/waterheater">Water Heater</option>
+				<option id="usage-range" value="daily/usage/range">Range</option>
+				<option id="usage-dryer" value="daily/usage/dryer">Dryer</option>
+				<option id="usage-dw" value="daily/usage/dishwasher">Dish Washer</option>
+				<option id="usage-wp" value="daily/usage/waterpump">Water Pump</option>
+				<option id="usage-washer" value="daily/usage/washer">Washer</option>
+				<option id="usage-other" value="daily/usage/allother">All other</option>
+			</optgroup>
+			<optgroup label="Daily Temperature">
+				<option id="hdd" value="dailyhdd">Heating Degree Days</option>
+				<option id="temp-low" value="daily/outdoortemplow">Outdoor Temperature (Low)</option>
+				<option id="temp-high" value="daily/outdoortemphigh">Outdoor Temperature (High)</option>
+			</optgroup>
+		</optgroup>
+	</select>
+	<p id="asof">As of: {{data.asofDate}}</p>
+</div>

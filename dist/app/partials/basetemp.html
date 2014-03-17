@@ -1,0 +1,34 @@
+<p ng-class="{warning: warning}">{{message}}</p>
+
+<p><a href="" ng-click="moreinfo = !moreinfo" ng-init="moreinfo = false">What is this?</a>
+
+<p ng-show="moreinfo">This is a linear regression analysis correlating HDD to kWh used by our ASHP. 
+	Periods of sun with > 500 watt-hours were removed to limit the effect of passive solar heating. Learn more about using 
+	linear regression analysis on energy consumption data at 
+	<a href="http://www.degreedays.net/regression-analysis" target="_blank">DegreeDays.net</a>.
+</p></p>
+
+<p>Sample size:</p>
+
+<ul>
+	<li><input id="hours" type="radio" ng-model="options.period" value="hours" /><label for="hours">Hours</label> </li>
+	<li><input id="days" type="radio" ng-model="options.period" value="days" /><label for="days">Days</label></li>
+	<li><input id="months" type="radio" ng-model="options.period" value="months" /><label for="months">Months</label></li>
+</ul>
+
+<p>Base temperature (F&deg;) :</p>
+
+<ul>
+	<li><input type="text" ng-model="options.base" pattern="[0-9]*" /><button ng-click="update()">Update</button>
+</ul>
+
+<p>Regression Line:</p>
+
+<p>
+	<ul>
+		<li>Slope : {{data.lr.slope | number:4}}</li>
+		<li>Intercept : {{data.lr.intercept | number:3}}</li>
+		<li>R<sup>2</sup> : {{data.lr.r2 | number:4}}</li>
+		<li>kWh = {{data.lr.slope | number:4}} x hdd + {{data.lr.intercept | number:3}}</li>
+	</ul>
+</p>

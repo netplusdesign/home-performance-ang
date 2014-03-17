@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Home Performance Charting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+	<div id="page">
+		<div id="figure">
+			<div class="nav" ng-controller="NavigationCtrl">
+				<h1>{{data.houseName}}</h1>
+				<ng-include src="'partials/nav.html'"></ng-include>
+			</div>
+			<div class="content" ng-view></div>
+		</div>
+		<div id="chart">
+			<div id="view1" ></div>
+			<div id="view2" ></div>
+		</div>		
+		<footer>
+			<p>&copy; netplusdesign 2012-2014</p> 
+		</footer>
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+	<script src="//code.highcharts.com/adapters/standalone-framework.js"></script>
+	<script src="//code.highcharts.com/highcharts.js"></script>
+	<script src="js/home-performance-ang.min.js"></script>
+</body>
+</html>
