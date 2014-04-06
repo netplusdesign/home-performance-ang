@@ -1,11 +1,20 @@
 {
   "name": "home-performance-ang",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
     "Larry Burks"
   ],
   "description": "Port of home-performance-charting to AngularJS",
-  "main": "test",
+  "main": [
+    "./app/index.html",
+    "./app/data/**",
+    "./app/js/app.js",
+    "./app/js/controllers.js",
+    "./app/js/services.js",
+    "./app/js/filters.js",
+    "./app/js/directives.js",
+    "./app/js/partials/***"
+  ],
   "license": "MIT",
   "homepage": "app/index.html",
   "ignore": [
@@ -21,6 +30,7 @@
     "angular": "~1.2.14",
     "angular-resource": "~1.2.14",
     "highcharts": "http://code.highcharts.com/highcharts.js",
-    "highcharts-standalone-framework": "http://code.highcharts.com/adapters/standalone-framework.js"
+    "highcharts-standalone-framework": "http://code.highcharts.com/adapters/standalone-framework.js",
+    "chroma-js": "~0.5.6"
   }
 }

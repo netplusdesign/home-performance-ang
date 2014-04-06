@@ -85,8 +85,12 @@ class Output {
 	}
 	
 	public function printOutput () {
-		$this->combined -> totals = $this->totals;
-		$this->combined -> months = $this->months;
+		if ( count($this->totals) > 0) {
+			$this->combined -> totals = $this->totals;
+		}
+		if ( count($this->months) > 0) {
+			$this->combined -> months = $this->months;
+		}
 		foreach( $this->insertedProps as $name ) {
 			$this->combined -> $name = $this->$name;
 		}

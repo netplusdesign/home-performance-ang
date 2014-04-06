@@ -148,6 +148,7 @@ _QUERY;
 	}
 	else
 	{
+		if ($circuit == 'range') $circuit = 'stove'; // ugly workaround, part 1
 		// =======================
 		// drill down to circuit x
 		$circuits = array(
@@ -165,14 +166,15 @@ _QUERY;
 		// 6x) circuit by month
 		$query .= "SELECT date, $circuit FROM energy_monthly WHERE house_id = $house AND YEAR(date) = $year AND device_id = 5 GROUP BY MONTH(date);";
 	}
-
+	if ($circuit == 'stove') $circuit = 'range'; // ugly workaround, part 2
+	
 	$output->insertObject( "circuit", array('name', 'title'), array($circuit, $circuit_title) );
 	
 	if ( mysqli_multi_query($link, $query )) {
 		if ( $circuit == 'summary' ) {
 			if ( $result = mysqli_store_result( $link ) ) {
 				$columns = mysqli_fetch_row( $result );
-				$objNames = array( "all", "water_heater", "ashp", "water_pump", "dryer", "washer", "dishwasher", "stove", "all_other" );
+				$objNames = array( "all", "water_heater", "ashp", "water_pump", "dryer", "washer", "dishwasher", "range", "all_other" );
 				$names = array( "Total", "Water heater", "ASHP", "Water pump", "Dryer", "Washer", "Dishwasher", "Range", "All other" );
 				$arrNames = array( "name", "title", "actual" );
 				for ($i = 0; $i < count( $columns ); $i++)

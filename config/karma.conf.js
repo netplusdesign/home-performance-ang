@@ -7,7 +7,9 @@ module.exports = function(config){
       'app/lib/angular/angular-*.js',
       'test/lib/angular/angular-mocks.js',
       'app/js/**/*.js',
-      'test/unit/**/*.js'
+      'test/unit/**/*.js',
+      'bower_components/moment/moment.js',
+      'bower_components/chroma-js/chroma.js'
     ],
 
     exclude : [
