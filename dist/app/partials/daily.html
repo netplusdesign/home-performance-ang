@@ -1,0 +1,13 @@
+<p class="warning" ng-show="warning">{{message}}</p>
+
+<div ng-if="data" 
+	id="daily" 
+	net-calendar 
+	calendar="data" 
+	view="view" 
+	chart-date="chartDate" 
+	on-month-change="changeMonth(direction)" 
+	on-select-date="selectChartDate(date)">
+</div>
+
+<p class="notes" ng-if="year == 2012">Circuit level data starts March 16, 2012</p>

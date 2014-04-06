@@ -1,8 +1,8 @@
 <p ng-class="{warning: warning}">{{message}}</p>
 <p><b>Wh/SF&sup1;/HDD&sup2;</b>: {{data.wh_sf_hdd | number:3}}</p>
 <p><b>BTU&sup3;/SF/HDD</b>: {{data.btu_sf_hdd | number:3}}</p>
-<p><b>Coldest temp.</b>: {{data.coldest_hour.temperature}}, Date: <a ng-href="daily.html?date={{data.coldest_hour.date | date:'yyyy-MM-dd'}}&time={{data.coldest_hour.date | date:'HH'}}">{{data.coldest_hour.date | date:"M/d/yyyy h a"}}</a></p>
-<p><b>Coldest day</b>: {{data.coldest_day.temperature}}, Date: <a ng-href="daily.html?date={{data.coldest_day.date | date:'yyyy-MM-dd'}}">{{data.coldest_day.date | date:"M/d/yyyy"}}</a></p>
+<p><b>Coldest temp.</b>: {{data.coldest_hour.temperature}}, Date: <a ng-href="#/daily/templow?date={{data.coldest_hour.date | date:'yyyy-MM-dd'}}&time={{data.coldest_hour.date | date:'HH'}}">{{data.coldest_hour.date | date:"M/d/yyyy h a"}}</a></p>
+<p><b>Coldest day</b>: {{data.coldest_day.temperature}}, Date: <a ng-href="#/daily/templow?date={{data.coldest_day.date | date:'yyyy-MM-dd'}}">{{data.coldest_day.date | date:"M/d/yyyy"}}</a></p>
 <table id="hdd">
 	<tr>
 		<th></th>
@@ -17,7 +17,7 @@
 		<th ng-class="{negative: data.totals.estimated<0, positive: data.totals.estimated>=0}">{{data.totals.diff | number:1}}</th>
 	</tr>
 	<tr ng-repeat="month in data.months">
-		<td class="name"><a ng-href="daily.html?date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+		<td class="name"><a ng-href="#/daily/hdd?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
 		<td>{{month.actual | number:0}}</td>
 		<td>{{month.estimated | number:0}}</td>
 		<td ng-class="{negative: month.diff<0, positive: month.diff>=0}">{{month.diff | number:1}}</td>

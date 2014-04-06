@@ -1,6 +1,6 @@
 <p ng-class="{warning: warning}">{{message}}</p>
 
-<!-- conditional, if summary-->
+<!-- conditional, if summary -->
 <div ng-if="data.circuit.name == 'summary'">
 <table id="usage">
 	<tr>
@@ -9,42 +9,42 @@
 		<th class="label">% of total</th>
 	</tr>
 	<tr ng-repeat="circuit in data.circuits">
-		<td class="name"><a ng-href="#/monthly/usage/{{circuit.name}}" >{{circuit.title}}</a></td>
+		<td class="name"><a ng-href="#/monthly/usage/{{circuit.name}}?house={{house}}&date={{ date | date:'yyyy-MM-dd' }}" >{{circuit.title}}</a></td>
 		<td>{{circuit.actual | number:0}}</td>
 		<td>{{circuit.perc | number:0}}</td>
 	</tr>
 </table>
 </div>
 
-<!-- conditional, if circuit-->
+<!-- conditional, if circuit -->
 <div ng-if="data.circuit.name != 'summary'">
-<p><a href="#/monthly/usage/summary">&lt;- All circuits</a></p>
+<p><a href="#/monthly/usage/summary?house={{house}}&date={{ date | date:'yyyy-MM-dd' }}">&lt;- All circuits</a></p>
 
 <table id="{{data.circuit.name}}">
 	<tr>
 		<th class="name">{{data.circuit.title}}</th>
 		<th class="label">Actual</th>
-		<!-- conditional, if summary-->
+		<!-- conditional, if summary -->
 		<th ng-if="data.circuit.name == 'all'" class="label">Budget</th>
-		<!-- conditional, if ashp-->
+		<!-- conditional, if ashp -->
 		<th ng-if="data.circuit.name == 'ashp'" class="label">Projected&sup2;</th>
 		<th ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" class="label">Diff(%)</th>
 	</tr>
 	<tr>
 		<th class="name">YTD</th>
 		<th>{{data.totals.actual | number:0}}</th>
-		<!-- conditional, if summary-->
+		<!-- conditional, if summary -->
 		<th ng-if="data.circuit.name == 'all'">{{data.totals.budget | number:0}}</th>
 		<!-- conditional, if ashp-->
 		<th ng-if="data.circuit.name == 'ashp'" title="HDD base 50&deg;F = {{data.totals.hdd | number:0}}">{{data.totals.projected | number:0}}</th>
 		<th ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" ng-class="{negative: data.totals.diff<0, positive: data.totals.diff>=0}">{{data.totals.diff | number:1}}</th>
 	</tr>
 	<tr ng-repeat="month in data.months">
-		<td class="name"><a ng-href="daily.html?date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+		<td class="name"><a ng-href="#/daily/usage/{{ data.circuit.name }}?house={{house}}&date={{ month.date | date:'yyyy-MM' }}" >{{month.date | date:"MMM"}}</a></td>
 		<td>{{month.actual | number:0}}</td>
-		<!-- conditional, if summary-->
+		<!-- conditional, if summary -->
 		<td ng-if="data.circuit.name == 'all'">{{month.budget | number:0}}</td>
-		<!-- conditional, if ashp-->
+		<!-- conditional, if ashp -->
 		<td ng-if="data.circuit.name == 'ashp'" title="HDD base 50&deg;F = {{month.hdd | number:0}}">{{month.projected | number:0}}</td>
 		<td ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" ng-class="{negative: month.diff<0, positive: month.diff>=0}">{{month.diff | number:1}}</td>
 	</tr>

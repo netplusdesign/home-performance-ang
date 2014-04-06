@@ -7,17 +7,19 @@ All future development on the home perforance app will take place here.
 
 ## Progress
 
+v0.2 Added daily and hourly views.  
 v0.1 Currently, only the monthly views and charts are working. 
 
 See working prototype at [netplusdesign](http://netplusdesign.com/app)
 
-Next up, daily views (and directives).
+Next up, hourly charts are a bit slow. Need to update series data rather then destroy and recreate chart each time.
 
 ## Requires
 
 * AngularJS
 * Momentjs
 * Highcharts
+* Chroma
 
 First get Node, Grunt and Bower.
 
