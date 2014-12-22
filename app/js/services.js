@@ -992,7 +992,6 @@ angular.module( 'myApp.services', [] ).
 			insertHeatEfficiency : insertHeatEfficiency,
 			insertEfficiency : insertEfficiency,
 			insertLinearRegression : insertLinearRegression,
-			// expandAttribute : expandAttribute,
 			insertMeasure : insertMeasure,
 			insertColor : insertColor,
 			sortChildObjectsByProp : sortChildObjectsByProp

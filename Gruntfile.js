@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			test: {
 				files : [
 				{
-					src: ['app/js/<%= pkg.name %>.min.js', 'app/js/standalone-framework.js', 'app/js/highcharts.js', 'app/data/*', 'app/partials/**', 'app/css/*', 'app/lib/**', 'app/daily.html'],
+					src: ['app/js/<%= pkg.name %>.min.js', 'app/js/standalone-framework.js', 'app/js/highcharts.js', 'app/data/*', 'app/partials/**', 'app/css/*', 'app/daily.html'],
 					dest: '<%= devDest %>'
 				},
 				{

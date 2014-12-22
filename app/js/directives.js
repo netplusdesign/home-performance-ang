@@ -66,11 +66,11 @@ angular.module('myApp.directives', []).
 					
 					if ( direction > 0 ) {
 
-						month = scope.chartDate.add( 'M', 1 );
+						month = scope.chartDate.add( 1, 'M' );
 					}
 					else {
 
-						month = scope.chartDate.subtract( 'M', 1 );
+						month = scope.chartDate.subtract( 1, 'M' );
 					}						
 					return month.format( 'YYYY-MM-DD' );
 				};
@@ -153,7 +153,7 @@ angular.module('myApp.directives', []).
 					endDate = moment( scope.calendar.range.endDate, 'YYYY-MM-DD' ),
 					startDate = moment( scope.calendar.range.startDate, 'YYYY-MM-DD' );
 
-					check.add( 'M', 1 );
+					check.add( 1, 'M' );
 
 					if ( check.isAfter( endDate ) ) {
 						// hide next month button
@@ -164,7 +164,7 @@ angular.module('myApp.directives', []).
 						scope.nextstop = false;
 					}
 
-					check.subtract( 'M', 2 );
+					check.subtract( 2, 'M' );
 
 					if ( check.isBefore( startDate ) ) {
 						// hide previous month button

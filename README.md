@@ -7,12 +7,13 @@ All future development on the home perforance app will take place here.
 
 ## Progress
 
-v0.2 Added daily and hourly views.  
-v0.1 Currently, only the monthly views and charts are working. 
+v0.2.1 Updated to most recent versions of all js libraries. Added support for eGuage energy monitor.
+v0.2.0 Added daily and hourly views.  
+v0.1.0 Currently, only the monthly views and charts are working. 
 
 See working prototype at [netplusdesign](http://netplusdesign.com/app)
 
-Next up, hourly charts are a bit slow. Need to update series data rather then destroy and recreate chart each time.
+Next up, hourly charts are a bit slow. Need to update series data rather then destroy and recreate chart each time. ALso want to add a yearly summary view.
 
 ## Requires
 
