@@ -1,7 +1,6 @@
 'use strict';
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
-// cp scenarios.js ~/Sites/charting-performance-ang/test/e2e
 
 describe('my app', function() {
 
@@ -32,7 +31,9 @@ describe('my app', function() {
 			});	
 		
 			it('should automatically redirect to /summary when location hash/fragment is empty', function() {
-				expect(browser.getLocationAbsUrl()).toBe("http://127.0.0.1/~larry/charting-performance-ang/app/#/monthly/summary");
+				browser.getLocationAbsUrl().then(function(url) {
+					expect(url.split('#')[1]).toBe('/monthly/summary');
+				});
 			});
 		});
 	
@@ -214,7 +215,12 @@ describe('my app', function() {
 			});
 	
 			it('should stay on ashp circuit page when year selector changed to 2012', function() {
-				expect(browser.getLocationAbsUrl()).toBe("http://127.0.0.1/~larry/charting-performance-ang/app/#/monthly/usage/ashp?house=0&date=2012-12-31");
+				browser.getLocationAbsUrl().then(function(url) {
+					var path = url.split('#')[1].split('?');
+					var search = path[1].split('date=')[1];
+					expect(path[0]).toBe('/monthly/usage/ashp');
+					expect(search).toBe('2012-12-31');
+				});
 			});
 	
 			it('should render 2012 data when year selector changed to 2012', function() {
