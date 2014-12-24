@@ -7,6 +7,7 @@ All future development on the home perforance app will take place here.
 
 ## Progress
 
+v0.2.2 Added yearly view. Fixed issue #1.
 v0.2.1 Updated to most recent versions of all js libraries. Added support for eGuage energy monitor.
 v0.2.0 Added daily and hourly views.  
 v0.1.0 Currently, only the monthly views and charts are working. 
