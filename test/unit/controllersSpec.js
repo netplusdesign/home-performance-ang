@@ -94,8 +94,8 @@ describe('MonthlyCtrl', function() {
 	
 	beforeEach( inject( function( $rootScope, $controller, $q ) {
 
-		q = $q,	
-		scope = $rootScope.$new(),
+		q = $q;
+		scope = $rootScope.$new();
 		createController = function() {
             return $controller('MonthlyCtrl', {
 				$scope : scope,
@@ -108,7 +108,6 @@ describe('MonthlyCtrl', function() {
 		};
     }));
 	
-	// it('', function() {});
 	it('should insert avg. daily usage when view == summary', function() {
 		routeParams = { view : 'summary' };
 		mockData = {"totals":{"used":"7206.154","solar":"-8574.577","net":"-1368.423","hdd":"6810.250","adu":"19.7"},"months":[{"date":"2013-01-01","used":"880.949","solar":"-478.374","net":"402.575","hdd":"1188.596","adu":"28.4"},{"date":"2013-02-01","used":"811.571","solar":"-449.081","net":"362.490","hdd":"1066.626","adu":"29.0"},{"date":"2013-03-01","used":"806.205","solar":"-618.374","net":"187.831","hdd":"982.966","adu":"26.0"},{"date":"2013-04-01","used":"527.707","solar":"-919.527","net":"-391.820","hdd":"571.167","adu":"17.6"},{"date":"2013-05-01","used":"529.269","solar":"-903.916","net":"-374.647","hdd":"232.213","adu":"17.1"},{"date":"2013-06-01","used":"411.362","solar":"-802.487","net":"-391.125","hdd":"103.059","adu":"13.7"},{"date":"2013-07-01","used":"383.589","solar":"-929.168","net":"-545.579","hdd":"18.478","adu":"12.4"},{"date":"2013-08-01","used":"446.655","solar":"-960.804","net":"-514.149","hdd":"58.028","adu":"14.4"},{"date":"2013-09-01","used":"452.088","solar":"-936.330","net":"-484.242","hdd":"218.072","adu":"15.1"},{"date":"2013-10-01","used":"482.340","solar":"-674.075","net":"-191.735","hdd":"404.790","adu":"15.6"},{"date":"2013-11-01","used":"558.689","solar":"-639.284","net":"-80.595","hdd":"837.642","adu":"18.6"},{"date":"2013-12-01","used":"915.730","solar":"-263.157","net":"652.573","hdd":"1128.613","adu":"29.5"}]};
@@ -255,23 +254,23 @@ describe('DailyCtrl', function() {
 	
 	beforeEach( inject( function( $rootScope, $controller, $q ) {
 
-		q = $q,	
-		scope = $rootScope.$new(),
+		q = $q;
+		scope = $rootScope.$new();
 		createController = function() {
             return $controller('DailyCtrl', {
 				$scope : scope,
 				$route : route,
 				$routeParams : routeParams,
+				$location : location,
 				dataProvider : mockDataProviderService,
 				metadataService : mockMetadataService,
-				dataService : mockDataService,
+				dataService :  mockDataService,
 				chartService : mockChartService
 			});
 		};
     }));
 
-	// test not working
-	xit('should updateMonth and updateDate when view == netusage', function() {
+	it('should updateMonth and updateDate when view == netusage', function() {
 		routeParams = { view : 'netusage' };
 		route = { current : { $$route : { controller : 'DailyCtrl' } } };
 		mockDailyData = {"days":[{"date":"2013-12-01","adjusted_load":"11.676","solar":"-10.626","used":"22.302","outdoor_deg_min":"29.611","outdoor_deg_max":"41.601","hdd":"30.146","water_heater":"3.220","ashp":"6.843","water_pump":"0.162","dryer":"2.379","washer":"0.382","dishwasher":"0.000","stove":"0.153","all_other":"9.163"},{"date":"2013-12-02","adjusted_load":"21.797","solar":"-2.959","used":"24.756","outdoor_deg_min":"32.092","outdoor_deg_max":"38.131","hdd":"30.371","water_heater":"6.766","ashp":"7.286","water_pump":"0.131","dryer":"0.011","washer":"0.000","dishwasher":"0.981","stove":"0.151","all_other":"9.430"} ]};
@@ -283,7 +282,7 @@ describe('DailyCtrl', function() {
 		scope.$apply();
 		expect(mockDataProviderService.getHourlyData).toHaveBeenCalled();
 	});
-	it('should not reload controller when switch between daily views', function() {
+	xit('should not reload controller when switch between daily views', function() {
 		// how to test this?
 	});
 	
