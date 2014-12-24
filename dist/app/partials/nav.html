@@ -1,6 +1,9 @@
 <div>
 	<select id="year" ng-model="yearFilter.year" ng-change="changeYear()" ng_options="year for year in data.years track by year"></select>
 	<select id="view" ng-model="viewSelection.view" ng-change="changeView()">
+		<optgroup label="Yearly">
+			<option value="yearly/summary">Summary</option>
+		</optgroup>
 		<optgroup label="Monthly">
 			<option value="monthly/summary">Summary</option>
 			<option value="monthly/generation">Generation</option>

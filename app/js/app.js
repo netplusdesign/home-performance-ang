@@ -16,6 +16,12 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
+		when ( '/yearly/:view', { 
+			templateUrl: function ( params ) { 
+				return 'partials/yearly/' + params.view + '.html'; 
+			}, 
+			controller: 'YearlyCtrl'
+		}).
 		when ( '/monthly/:view', { 
 			templateUrl: function ( params ) { 
 				return 'partials/monthly/' + params.view + '.html'; 

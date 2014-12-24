@@ -2,6 +2,8 @@
 
 /* jasmine specs for services go here */
 
+// write tests for updates to putSeriesData 
+
 describe('service', function() {
 	
 	beforeEach(module('myApp.services'));
@@ -237,7 +239,36 @@ describe('service', function() {
 		
 	});
 
-	describe('dataService insertADU', function(){
+	describe('dataService insertADU for months', function(){
+		
+		var dataService,			
+		mockService = {
+			data : { houseID : 0,
+					 chartDate : '2013-12-01',
+					 asofDate : '2013-12-31' },
+			current : { year : '2013', 
+					    view : 'summary' }
+		},
+		mockDataSumBefore = {"totals":{"used":"12806.756","solar":"-17430.964","net":"-4624.208","hdd":"12695.097"},"years":[{"date":"2012-02-01","used":"5600.602","solar":"-8856.387","net":"-3255.785","hdd":"5884.847"},{"date":"2013-01-01","used":"7206.154","solar":"-8574.577","net":"-1368.423","hdd":"6810.250"}]},
+		mockDataSumAfter  = {"totals":{"used":"12806.756","solar":"-17430.964","net":"-4624.208","hdd":"12695.097","adu":17.519502051983583},"years":[{"date":"2012-02-01","used":"5600.602","solar":"-8856.387","net":"-3255.785","hdd":"5884.847","adu":15.3021912568306},{"date":"2013-01-01","used":"7206.154","solar":"-8574.577","net":"-1368.423","hdd":"6810.250","adu":19.74288767123288}]};
+
+		beforeEach(function() {
+			module(function ($provide) {
+				$provide.value('metadataService', mockService);
+			});								
+		});
+
+		beforeEach(inject(function(_dataService_) {
+			dataService = _dataService_;
+		}));
+
+		it('should insert adu values for data.totals and data.months[]', function() { 
+			expect( dataService.insertADU( mockDataSumBefore, ['used'], ['adu'] ) ).toEqual( mockDataSumAfter );
+		});
+
+	});
+
+	describe('dataService insertADU for months', function(){
 		
 		var dataService,			
 		mockService = {

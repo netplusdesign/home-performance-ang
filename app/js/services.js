@@ -184,7 +184,37 @@ angular.module( 'myApp.services', [] ).
 	}])
 	.factory( 'dataProvider', [ '$http', 'metadataService', function ( $http, metadataService ) {
 		
-		var getMonthlyMetadataDetails = function ( params ) {
+		var getYearlyDetails = function ( params ) {
+
+			return $http.get( 'data/get_yearly_summary.php', params ).then( function ( result ) {
+
+				return result.data;
+			}); 
+		},
+		getYearlyMetadata = function ( params ) {
+			
+			return getMonthlyMetadataDetails ( params ).
+
+			then( function () {
+			
+				return getYearlyDetails ( params );
+			});
+		},
+		getYearlyData = function ( routeParams ) {
+
+			var params = metadataService.validate ( routeParams );
+			// if no metadata, then get it first
+			if ( metadataService.data.asofDate ) {
+			
+				return getYearlyDetails( params );
+			}
+			else {
+			
+				return getYearlyMetadata ( params );
+			}
+		},
+		
+		getMonthlyMetadataDetails = function ( params ) {
 
 			return $http.get( 'data/get_monthly_metadata.php', params ).then( function ( result ) {
 
@@ -295,6 +325,7 @@ angular.module( 'myApp.services', [] ).
 		};
 		
 		return {
+			getYearlyData : getYearlyData,
 			getMonthlyData : getMonthlyData,
 			getDailyData : getDailyData,
 			getHourlyData : getHourlyData
@@ -373,13 +404,27 @@ angular.module( 'myApp.services', [] ).
 			
 			var i, j;
 			
-			for ( i = 0; i < data.months.length; i++ ) {
+			if ((!data.months) && (data.years.length > 0)) {
 
-				options.xAxis.categories.push( moment( data.months[ i ].date ).format( 'MMM' ) );
-
-				for ( j = 0; j < options.series.length; j++ ) {
-					
-					options.series[ j ].data.push( Math.round( data.months[ i ][ options.series[ j ].name.toLowerCase() ] ) );	
+				for ( i = 0; i < data.years.length; i++ ) {
+	
+					options.xAxis.categories.push( moment( data.years[ i ].date ).format( 'YYYY' ) );
+	
+					for ( j = 0; j < options.series.length; j++ ) {
+						
+						options.series[ j ].data.push( Math.round( data.years[ i ][ options.series[ j ].name.toLowerCase() ] ) );	
+					}
+				}
+				
+			} else {		
+				for ( i = 0; i < data.months.length; i++ ) {
+	
+					options.xAxis.categories.push( moment( data.months[ i ].date ).format( 'MMM' ) );
+	
+					for ( j = 0; j < options.series.length; j++ ) {
+						
+						options.series[ j ].data.push( Math.round( data.months[ i ][ options.series[ j ].name.toLowerCase() ] ) );	
+					}
 				}
 			}
 			return options;
@@ -735,26 +780,56 @@ angular.module( 'myApp.services', [] ).
 		
 		var insertADU = function (data, props, avg_props) {
 			
-			var i, j,
+			var i, j, d,
 			adu, 
 			daysInMonth, 
-			daysInYear = metadataService.getDaysYTD();
+			daysInYear,
+			totalDays = 0;
 			
-			for ( i = 0; i < props.length; i++ ) { 
-			
-				adu = data.totals[ props[i] ] / daysInYear;
-				data.totals[ avg_props[i] ] = adu;
-			}
+			if ((!data.months) && (data.years.length > 0)) {
+				// years
+				for ( j = 0; j < data.years.length; j++ ) {
 
-			for ( j = 0; j < data.months.length; j++ ) {
-			
-				for (i = 0; i < props.length; i++ ) {
-			
-					daysInMonth = moment( data.months[j].date ).daysInMonth(); 
-					adu = data.months[j][ props[i] ] / daysInMonth;
-					data.months[j][ avg_props[i] ] = adu;
+					d = moment( data.years[j].date );
+					if ( d != metadataService.data.asofDate) { 
+						// assumes all prior years have a full year of data -- bad assumption
+						daysInYear = 365;
+						if ( moment( data.years[j].date ).isLeapYear() ) { daysInYear++; }
+						
+					} else {
+
+						daysInYear = metadataService.getDaysYTD();
+					}
+				
+					for ( i = 0; i < props.length; i++ ) {
+
+						adu = data.years[j][ props[i] ] / daysInYear;
+						data.years[j][ avg_props[i] ] = adu;
+					}
+					
+					totalDays = totalDays + daysInYear;
+				}
+			} else {
+				// months
+				for ( j = 0; j < data.months.length; j++ ) {
+				
+					for ( i = 0; i < props.length; i++ ) {
+				
+						daysInMonth = moment( data.months[j].date ).daysInMonth(); 
+						adu = data.months[j][ props[i] ] / daysInMonth;
+						data.months[j][ avg_props[i] ] = adu;
+					}
+					
+					totalDays = totalDays + daysInMonth;
 				}
 			}
+			// total
+			for ( i = 0; i < props.length; i++ ) { 
+			
+				adu = data.totals[ props[i] ] / totalDays;
+				data.totals[ avg_props[i] ] = adu;
+			}
+			//console.log(JSON.stringify(data));
 			return data;
 		},
 

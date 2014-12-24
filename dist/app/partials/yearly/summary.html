@@ -1,0 +1,29 @@
+<p ng-class="{warning: warning}">{{message}}</p>
+<table id="summary">
+	<tr>
+		<th></th>
+		<th class="label">Used</th>
+		<th class="label">Solar</th>
+		<th class="label">Net</th>
+		<th class="label">Avg.<br/>daily<br/>usage</th>
+		<th class="label">HDD&sup1;</th>
+	</tr>
+	<tr>
+		<th class="name">Totals</th>
+		<th>{{data.totals.used | number:0}}</th>
+		<th>{{data.totals.solar | number:0}}</th>
+		<th>{{data.totals.net | number:0}}</th>
+		<th>{{data.totals.adu | number:1}}</th>
+		<th>{{data.totals.hdd | number:0}}</th>
+	</tr>
+	<tr ng-repeat="year in data.years">
+		<td class="name"><a ng-href="#/monthly/summary?house={{house}}&date={{year.date | date:'yyyy-MM'}}" >{{year.date | date:"yyyy"}}</a></td>
+		<td>{{year.used | number:0}}</td>
+		<td>{{year.solar | number:0}}</td>
+		<td>{{year.net | number:0}}</td>
+		<td>{{year.adu | number:1}}</td>
+		<td>{{year.hdd | number:0}}</td>
+	</tr>
+</table>
+<p class="notes">All power values in kWh.</p>
+<p class="notes">1. Base 65&deg;F</p>
