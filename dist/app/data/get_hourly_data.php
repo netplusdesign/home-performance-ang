@@ -43,7 +43,8 @@ FROM (SELECT house_id, date, temperature AS 'indoor1_deg' FROM temperature_hourl
   LEFT JOIN energy_hourly e 
 	ON CAST(LEFT(e.date,13) AS DATETIME) = CAST(LEFT(ti1.date,13) AS DATETIME) AND e.house_id = ti1.house_id
 WHERE CAST(ti1.date AS DATE) = DATE('2014-02-07')
-  AND ti1.house_id = 0;
+  AND ti1.house_id = 0
+ORDER BY e.date;
 		 * */
 		
 	    $query = "SELECT ti1.date, e.adjusted_load, e.solar, e.used, ";
@@ -62,7 +63,8 @@ WHERE CAST(ti1.date AS DATE) = DATE('2014-02-07')
 		$query .= "LEFT JOIN energy_hourly e ";
 		$query .= "ON CAST(LEFT(e.date,13) AS DATETIME) = CAST(LEFT(ti1.date,13) AS DATETIME) AND e.house_id = ti1.house_id ";
 		$query .= "WHERE CAST(ti1.date AS DATE) = DATE('$date') ";
-		$query .= "AND ti1.house_id = $house;";
+		$query .= "AND ti1.house_id = $house ";
+		$query .= "ORDER BY e.date;";
 		
 		$output = @new Output();
 		

@@ -31,13 +31,14 @@
 		echo ")]}',\n ";
 		
 			/*
-		SELECT tu.date, e.adjusted_load, e.solar, e.used, tu.outdoor_deg_min, tu.outdoor_deg_max, th.hdd, e.water_heater, e.ashp, e.water_pump, e.dryer, e.washer, e.dishwasher, e.stove
-		FROM (SELECT house_id, date, temperature_min AS 'outdoor_deg_min', temperature_max AS 'outdoor_deg_max' FROM temperature_daily WHERE device_id = 0) tu 
-			LEFT JOIN (SELECT house_id, date, hdd FROM hdd_daily) th ON th.date = tu.date AND th.house_id = tu.house_id
-			LEFT JOIN energy_daily e ON e.date = tu.date AND e.house_id = tu.house_id
-		WHERE tu.house_id = 0
-			AND YEAR(tu.date) = 2012
-			AND MONTH(tu.date) = 3;
+			SELECT tu.date, e.adjusted_load, e.solar, e.used, tu.outdoor_deg_min, tu.outdoor_deg_max, th.hdd, e.water_heater, e.ashp, e.water_pump, e.dryer, e.washer, e.dishwasher, e.stove
+			FROM (SELECT house_id, date, temperature_min AS 'outdoor_deg_min', temperature_max AS 'outdoor_deg_max' FROM temperature_daily WHERE device_id = 0) tu 
+				LEFT JOIN (SELECT house_id, date, hdd FROM hdd_daily) th ON th.date = tu.date AND th.house_id = tu.house_id
+				LEFT JOIN energy_daily e ON e.date = tu.date AND e.house_id = tu.house_id
+			WHERE tu.house_id = 0
+				AND YEAR(tu.date) = 2012
+				AND MONTH(tu.date) = 3
+			ORDER BY e.date;
 			 * */
 	    $query = "SELECT tu.date, e.adjusted_load, e.solar, e.used, ";
 	    $query .= "tu.outdoor_deg_min, tu.outdoor_deg_max, th.hdd, ";
@@ -48,7 +49,8 @@
 		$query .= "LEFT JOIN energy_daily e ON e.date = tu.date AND e.house_id = tu.house_id ";
 		$query .= "WHERE tu.house_id = $house ";
 		$query .= "AND YEAR(tu.date) = $year ";
-		$query .= "AND MONTH(tu.date) = $month;";
+		$query .= "AND MONTH(tu.date) = $month ";
+		$query .= "ORDER BY e.date;";
 		
 		$output = @new Output();
 		
