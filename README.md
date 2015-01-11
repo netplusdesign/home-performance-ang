@@ -3,18 +3,7 @@
 This project is a ground up rewrite of [home-performance-charting](https://github.com/netplusdesign/home-performance-charting) 
 using [AngularJS](http://angularjs.org). 
 
-All future development on the home perforance app will take place here.
-
-## Progress
-
-v0.2.2 Added yearly view. Fixed issue #1.
-v0.2.1 Updated to most recent versions of all js libraries. Added support for eGuage energy monitor.
-v0.2.0 Added daily and hourly views.  
-v0.1.0 Currently, only the monthly views and charts are working. 
-
 See working prototype at [netplusdesign](http://netplusdesign.com/app)
-
-Next up, hourly charts are a bit slow. Need to update series data rather then destroy and recreate chart each time. ALso want to add a yearly summary view.
 
 ## Requires
 
@@ -35,3 +24,8 @@ Edit grunt file (devDest) path, then run:
 * grunt dev
 
 Database setup scripts can be found in the [home-performance-charting](https://github.com/netplusdesign/home-performance-charting) repo.
+
+## What's next
+
+* A version using Twitter Bootstrap is almost done.
+* Also currently working on a rewrite of the entire backend using Flask and SQLAlchemy to create a RESTful API.
