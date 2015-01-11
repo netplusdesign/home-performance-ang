@@ -1,0 +1,63 @@
+<p ng-class="{'alert alert-danger': warning}">{{message}}</p>
+
+<!-- conditional, if summary -->
+<div ng-if="data.circuit.name == 'summary'">
+	<div class="table-responsive">
+		<table id="usage" class="table table-condensed text-right">
+			<tr>
+				<th></th>
+				<th class="text-right"><abbr title="Year to date">YTD</abbr><span ng-if="year == 2012">&sup1;</span></th>
+				<th class="text-right">% of total</th>
+			</tr>
+			<tr ng-repeat="circuit in data.circuits">
+				<td class="text-left"><a ng-href="#/monthly/usage/{{circuit.name}}?house={{house}}&date={{ date | date:'yyyy-MM-dd' }}" >{{circuit.title}}</a></td>
+				<td>{{circuit.actual | number:0}}</td>
+				<td>{{circuit.perc | number:0}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- conditional, if circuit -->
+<div ng-if="data.circuit.name != 'summary'">
+	<p><a href="#/monthly/usage/summary?house={{house}}&date={{ date | date:'yyyy-MM-dd' }}">&lt; All circuits</a></p>
+
+	<div class="table-responsive">
+		<table id="{{data.circuit.name}}" class="table table-condensed text-right">
+			<tr>
+				<th>{{data.circuit.title}}</th>
+				<th class="text-right">Actual</th>
+				<!-- conditional, if summary -->
+				<th ng-if="data.circuit.name == 'all'" class="text-right">Budget</th>
+				<!-- conditional, if ashp -->
+				<th ng-if="data.circuit.name == 'ashp'" class="text-right">Projected&sup2;</th>
+				<th ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" class="text-right">Diff(%)</th>
+			</tr>
+			<tr>
+				<th><abbr title="Year to date">YTD</abbr><span ng-if="year == 2012">&sup1;</span></th>
+				<th class="text-right">{{data.totals.actual | number:0}}</th>
+				<!-- conditional, if summary -->
+				<th ng-if="data.circuit.name == 'all'" class="text-right">{{data.totals.budget | number:0}}</th>
+				<!-- conditional, if ashp-->
+				<th ng-if="data.circuit.name == 'ashp'" title="HDD base 50&deg;F = {{data.totals.hdd | number:0}}" class="text-right">{{data.totals.projected | number:0}}</th>
+				<th ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" ng-class="{'text-danger': data.totals.diff<0, 'text-success': data.totals.diff>=0}" class="text-right">{{data.totals.diff | number:1}}</th>
+			</tr>
+			<tr ng-repeat="month in data.months">
+				<td class="text-left"><a ng-href="#/daily/usage/{{ data.circuit.name }}?house={{house}}&date={{ month.date | date:'yyyy-MM' }}" >{{month.date | date:"MMM"}}</a></td>
+				<td>{{month.actual | number:0}}</td>
+				<!-- conditional, if summary -->
+				<td ng-if="data.circuit.name == 'all'">{{month.budget | number:0}}</td>
+				<!-- conditional, if ashp -->
+				<td ng-if="data.circuit.name == 'ashp'" title="HDD base 50&deg;F = {{month.hdd | number:0}}">{{month.projected | number:0}}</td>
+				<td ng-if="data.circuit.name == 'all' || data.circuit.name == 'ashp'" ng-class="{'text-danger': month.diff<0, 'text-success': month.diff>=0}">{{month.diff | number:1}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<p class="small">All power values in <abbr title="Kilowatt hours">kWh</abbr></p>
+<!-- need conditional statement for this -->
+<ul class="list-unstyled small" >
+	<li ng-if="year == 2012">1. Circuit level data starts March 16, 2012</li>
+	<li ng-if="data.circuit.name == 'ashp'">2. Projected kWh = 0.2261 x <abbr title="Heating degree days">HDD</abbr> base 50&deg;F + 0.7565</li>
+</ul>
