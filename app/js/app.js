@@ -46,5 +46,5 @@ config(['$routeProvider', function($routeProvider) {
 			}, 
 			controller: 'DailyCtrl'
 		}).
-		otherwise( { redirectTo: '/monthly/summary' } );
+		otherwise( { redirectTo: '/yearly/summary' } );
 }]);
