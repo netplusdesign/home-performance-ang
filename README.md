@@ -27,6 +27,7 @@ First get Node, Grunt and Bower.
 
 Then clone this repo and run:
 
+* npm install
 * bower install
 
 Edit grunt file (devDest) path, then run:
