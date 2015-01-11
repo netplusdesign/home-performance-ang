@@ -1,7 +1,7 @@
 {
   "name": "home-performance-ang",
   "description": "Port of home performance app to AngularJS",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "repository": "https://github.com/netplusdesign/home-performance-ang",
   "devDependencies": {
     "karma": "^0.12.16",

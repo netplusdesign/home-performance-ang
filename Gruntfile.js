@@ -56,11 +56,16 @@ module.exports = function(grunt) {
 				},
 				{
 					src: 'bower_components/highcharts-standalone-framework/index.js',
-					dest: '<%= devDest %>app/js/standalone-framework.js' },
+					dest: '<%= devDest %>app/js/standalone-framework.js' 
+				},
 				{
 					src: 'bower_components/moment/moment.js',
 					dest: '<%= devDest %>app/js/moment.js' 
-				} 
+				}, 
+				{
+					src: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
+					dest: '<%= devDest %>app/css/bootstrap.min.css' 
+				}
 				]
 			},
 			dev: {
@@ -100,7 +105,11 @@ module.exports = function(grunt) {
 				{
 					src: 'bower_components/chroma-js/chroma.js',
 					dest: '<%= devDest %>app/js/chroma.js' 
-				} 
+				}, 
+				{
+					src: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
+					dest: '<%= devDest %>app/css/bootstrap.min.css' 
+				}
 				]
 			},
 			git: {

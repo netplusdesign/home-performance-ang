@@ -13,8 +13,9 @@ angular.module('myApp.directives', []).
 		return {
 			restrict : 'A',
 			template : 
-				'<table>' +
-				'<caption>' +
+				"<div class='table-responsive''>" +
+				"<table class='table'>" +
+				"<caption>" +
 					'<a id="back" href="" ng-class="{ calnav : true, nogo : backstop }" ng-click="onMonthChange( { direction : changeMonth( -1 ) } )">&#9664;</a> ' + 
 					'{{ calendar.days[0].date | date:"MMMM" }} {{ calendar.days[0].date | date:"yyyy" }} ' +
 					'<a id="next" href="" ng-class="{ calnav : true, nogo : nextstop }" ng-click="onMonthChange( { direction : changeMonth( 1 ) } )">&#9654;</a>' +
@@ -25,6 +26,7 @@ angular.module('myApp.directives', []).
 					'</td>' +
 				'</tr>' +
 				'</table>' +
+				'</div>' +
 				'<table id="legend">' + 
 					'<tr>' +
 						'<td class="heat" ng-repeat="color in colors" ng-style="{{color}}" title={{color.title}}>' +

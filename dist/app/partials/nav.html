@@ -1,6 +1,6 @@
-<div>
-	<select id="year" ng-model="yearFilter.year" ng-change="changeYear()" ng_options="year for year in data.years track by year"></select>
-	<select id="view" ng-model="viewSelection.view" ng-change="changeView()">
+<div class="form-inline">
+	<select class="form-control input-sm" id="year" ng-model="yearFilter.year" ng-change="changeYear()" ng_options="year for year in data.years track by year"></select>
+	<select class="form-control input-sm" id="view" ng-model="viewSelection.view" ng-change="changeView()">
 		<optgroup label="Yearly">
 			<option value="yearly/summary">Summary</option>
 		</optgroup>
@@ -33,5 +33,5 @@
 			</optgroup>
 		</optgroup>
 	</select>
-	<p id="asof">As of: {{data.asofDate}}</p>
+	<p class="text-right"><small id="asof">As of: {{data.asofDate}}</small></p>
 </div>

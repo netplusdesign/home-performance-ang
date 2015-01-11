@@ -1,42 +1,46 @@
-<p ng-class="{warning: warning}">{{message}}</p>
+<p ng-class="{'alert alert-danger': warning}">{{message}}</p>
 
-<table id="water">
-	<tr>
-		<th></th>
-		<th colspan="3" class="desc">Gallons</th>
-		<th colspan="2" class="desc">Watt hrs<span ng-if="year == 2012">&sup1;</span>/gal</th>
-	</tr>
-	<tr>
-		<th></th>
-		<th class="label">Cold</th>
-		<th class="label">Hot</th>
-		<th class="label">Total</th>
-		<th class="label">Hot<br/>water</th>
-		<th class="label">Water<br/>pump</th>
-	</tr>
-	<tr>
-		<th class="name">Daily<br/>Avg.</th>
-		<th>{{data.totals.cold_avg | number:1}}</th>
-		<th>{{data.totals.hot_avg | number:1}}</th>
-		<th>{{data.totals.main_avg | number:1}}</th>
-		<th>NA</th>
-		<th>NA</th>
-	</tr>
-	<tr>
-		<th class="name">YTD</th>
-		<th>{{data.totals.cold | number:0}}</th>
-		<th>{{data.totals.hot | number:0}}</th>
-		<th>{{data.totals.main | number:0}}</th>
-		<th>{{data.totals.water_heater_efficiency | number:1}}</th>
-		<th>{{data.totals.water_pump_efficiency | number:3}}</th>
-	</tr>
-	<tr ng-repeat="month in data.months">
-		<td class="name"><a ng-href="#/daily/usage/water_pump?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
-		<td>{{month.cold | number:0}}</td>
-		<td>{{month.hot | number:0}}</td>
-		<td>{{month.main | number:0}}</td>
-		<td>{{month.water_heater_efficiency | number:1}}</td>
-		<td>{{month.water_pump_efficiency | number:3}}</td>
-	</tr>
-</table>
-<p class="notes" ng-if="year == 2012">1. Circuit level data starts March 16, 2012</p>
+<div class="table-responsive">
+	<table id="water" class="table table-condensed text-right">
+		<tr>
+			<th></th>
+			<th colspan="3" class="text-center">Gallons</th>
+			<th colspan="2" class="text-center">Watt hrs<span ng-if="year == 2012">&sup1;</span>/gal</th>
+		</tr>
+		<tr>
+			<th></th>
+			<th class="text-right">Cold</th>
+			<th class="text-right">Hot</th>
+			<th class="text-right">Total</th>
+			<th class="text-right">Hot<br/>water</th>
+			<th class="text-right">Water<br/>pump</th>
+		</tr>
+		<tr>
+			<th>Daily Avg.</th>
+			<th class="text-right">{{data.totals.cold_avg | number:1}}</th>
+			<th class="text-right">{{data.totals.hot_avg | number:1}}</th>
+			<th class="text-right">{{data.totals.main_avg | number:1}}</th>
+			<th class="text-right">NA</th>
+			<th class="text-right">NA</th>
+		</tr>
+		<tr>
+			<th><abbr title="Year to date">YTD</abbr></th>
+			<th class="text-right">{{data.totals.cold | number:0}}</th>
+			<th class="text-right">{{data.totals.hot | number:0}}</th>
+			<th class="text-right">{{data.totals.main | number:0}}</th>
+			<th class="text-right">{{data.totals.water_heater_efficiency | number:1}}</th>
+			<th class="text-right">{{data.totals.water_pump_efficiency | number:3}}</th>
+		</tr>
+		<tr ng-repeat="month in data.months">
+			<td class="text-left"><a ng-href="#/daily/usage/water_pump?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+			<td>{{month.cold | number:0}}</td>
+			<td>{{month.hot | number:0}}</td>
+			<td>{{month.main | number:0}}</td>
+			<td>{{month.water_heater_efficiency | number:1}}</td>
+			<td>{{month.water_pump_efficiency | number:3}}</td>
+		</tr>
+	</table>
+</div>
+<ol>
+	<li class="small" ng-if="year == 2012">Circuit level data starts March 16, 2012</li>
+</ol>

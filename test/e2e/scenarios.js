@@ -30,9 +30,9 @@ describe('my app', function() {
 				browser.get('');
 			});	
 		
-			it('should automatically redirect to /summary when location hash/fragment is empty', function() {
+			it('should automatically redirect to /yearly/summary when location hash/fragment is empty', function() {
 				browser.getLocationAbsUrl().then(function(url) {
-					expect(url.split('#')[1]).toBe('/monthly/summary');
+					expect(url.split('#')[1]).toBe('/yearly/summary');
 				});
 			});
 		});
@@ -131,10 +131,9 @@ describe('my app', function() {
 			});
 	    
 			it('should not display note 2', function() {
-				element.all(by.css('.notes')).then(function(notes) {
-					expect(notes.length).toBe(2);
-					expect(notes[0].getText()).toBe('All power values in kWh.');
-					expect(notes[1].getText()).toBe('1. Circuit level data starts March 16, 2012');
+				element.all(by.css('.list-unstyled')).then(function(notes) {
+					expect(notes.length).toBe(1);
+					expect(notes[0].getText()).toBe('1. Circuit level data starts March 16, 2012');
 				});
 			}); 
 		});
@@ -177,10 +176,9 @@ describe('my app', function() {
 			});
 	
 			it('should NOT display note 1', function() {
-				element.all(by.css('.notes')).then(function(notes) {
-					expect(notes.length).toBe(2);
-					expect(notes[0].getText()).toBe('All power values in kWh.');
-					expect(notes[1].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
+				element.all(by.css('.list-unstyled')).then(function(notes) {
+					expect(notes.length).toBe(1);
+					expect(notes[0].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
 				});
 			});    
 		});
@@ -196,11 +194,10 @@ describe('my app', function() {
 			});
 	
 			it('should display note 1', function() {
-				element.all(by.css('.notes')).then(function(notes) {
-					expect(notes.length).toBe(3);
-					expect(notes[0].getText()).toBe('All power values in kWh.');
-					expect(notes[1].getText()).toBe('1. Circuit level data starts March 16, 2012');
-					expect(notes[2].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
+				element.all(by.css('.list-unstyled li')).then(function(notes) {
+					expect(notes.length).toBe(2);
+					expect(notes[0].getText()).toBe('1. Circuit level data starts March 16, 2012');
+					expect(notes[1].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
 				});
 			});
 	
@@ -228,11 +225,10 @@ describe('my app', function() {
 			});
 	
 			it('should display note 1', function() {
-				element.all(by.css('.notes')).then(function(notes) {
-					expect(notes.length).toBe(3);
-					expect(notes[0].getText()).toBe('All power values in kWh.');
-					expect(notes[1].getText()).toBe('1. Circuit level data starts March 16, 2012');
-					expect(notes[2].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
+				element.all(by.css('.list-unstyled li')).then(function(notes) {
+					expect(notes.length).toBe(2);
+					expect(notes[0].getText()).toBe('1. Circuit level data starts March 16, 2012');
+					expect(notes[1].getText()).toBe('2. Projected kWh = 0.2261 x HDD base 50°F \+ 0.7565');
 				});
 			});
 		});
@@ -248,11 +244,11 @@ describe('my app', function() {
 			});
 	    
 			it('should display <span> for note 2', function() {
-				element.all(by.css('.notes')).then(function(notes) {
+				element.all(by.css('.small li')).then(function(notes) {
 					expect(notes.length).toBe(3);
-					expect(notes[0].getText()).toBe('1. Sq. footage = 1727.25, interior gross area (incl. basement)');
-					expect(notes[1].getText()).toBe('2. Excludes May-Sept values. Year 2012 also excludes Jan 1 - Mar 15 to match start of circuit data for ASHP.');
-					expect(notes[2].getText()).toBe('3. Conversion from kWh');
+					expect(notes[0].getText()).toBe('Square footage = 1727.25, interior gross area (incl. basement)');
+					expect(notes[1].getText()).toBe('Excludes May-Sept values. Year 2012 also excludes Jan 1 - Mar 15 to match start of circuit data for ASHP.');
+					expect(notes[2].getText()).toBe('Conversion from kWh');
 				});
 			}); 
 		});
@@ -269,11 +265,11 @@ describe('my app', function() {
 	    
 			it('should NOT display <span> for note 2', function() {
 				// expect(element('p.notes').text()).not().toMatch(/Year 2012 also excludes Jan 1 - Mar 15 to match start of circuit data for ASHP./);
-				element.all(by.css('.notes')).then(function(notes) {
+				element.all(by.css('.small li')).then(function(notes) {
 					expect(notes.length).toBe(3);
-					expect(notes[0].getText()).toBe('1. Sq. footage = 1727.25, interior gross area (incl. basement)');
-					expect(notes[1].getText()).toBe('2. Excludes May-Sept values');
-					expect(notes[2].getText()).toBe('3. Conversion from kWh');
+					expect(notes[0].getText()).toBe('Square footage = 1727.25, interior gross area (incl. basement)');
+					expect(notes[1].getText()).toBe('Excludes May-Sept values');
+					expect(notes[2].getText()).toBe('Conversion from kWh');
 				});
 			}); 	
 		});
@@ -289,9 +285,9 @@ describe('my app', function() {
 			});
 	    
 			it('should display note 1', function() {
-				element.all(by.css('.notes')).then(function(notes) {
+				element.all(by.css('.small')).then(function(notes) {
 					expect(notes.length).toBe(1);
-					expect(notes[0].getText()).toBe('1. Circuit level data starts March 16, 2012');
+					expect(notes[0].getText()).toBe('Circuit level data starts March 16, 2012');
 				});
 			}); 
 		});
@@ -307,7 +303,7 @@ describe('my app', function() {
 			});
 	    
 			it('should NOT display note 1', function() {
-				element.all(by.css('.notes')).then(function(notes) {
+				element.all(by.css('.small')).then(function(notes) {
 					expect(notes.length).toBe(0);
 				});
 			}); 

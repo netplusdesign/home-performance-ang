@@ -1,4 +1,4 @@
-<p class="warning" ng-show="warning">{{message}}</p>
+<p ng-class="{'alert alert-danger': warning}">{{message}}</p>
 
 <div ng-if="data" 
 	id="daily" 

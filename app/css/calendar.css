@@ -1,0 +1,14 @@
+/* calendar */
+	caption { text-align: center; color: #000000; font-size: 1.2em; }
+	td.no-data { background: #808080; }
+	td.calday { border: 3px solid white; vertical-align: top; text-align: } 
+	td.hover { text-decoration: underline; border: 1px solid black; cursor: pointer; cursor: hand; }
+	td.selected { text-decoration: none; border-bottom: 2px solid black; } 
+	a.calnav { color: #000000; padding: 0.8em 1.5em; }
+	a.nogo { display: none; } 
+
+table#legend { margin: 0; padding: 0; width: 100%; border-spacing: 0; border-collapse: collapse; empty-cells: show; }
+	td.heat { height: 20px; }
+p#range { margin-bottom: 25px; }
+	span#low-range { float: left; }
+	span#high-range { float: right; }

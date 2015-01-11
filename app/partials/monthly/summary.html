@@ -1,29 +1,34 @@
-<p ng-class="{warning: warning}">{{message}}</p>
-<table id="summary">
-	<tr>
-		<th></th>
-		<th class="label">Used</th>
-		<th class="label">Solar</th>
-		<th class="label">Net</th>
-		<th class="label">Avg.<br/>daily<br/>usage</th>
-		<th class="label">HDD&sup1;</th>
-	</tr>
-	<tr>
-		<th class="name">YTD</th>
-		<th>{{data.totals.used | number:0}}</th>
-		<th>{{data.totals.solar | number:0}}</th>
-		<th>{{data.totals.net | number:0}}</th>
-		<th>{{data.totals.adu | number:1}}</th>
-		<th>{{data.totals.hdd | number:0}}</th>
-	</tr>
-	<tr ng-repeat="month in data.months">
-		<td class="name"><a ng-href="#/daily/netusage?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
-		<td>{{month.used | number:0}}</td>
-		<td>{{month.solar | number:0}}</td>
-		<td>{{month.net | number:0}}</td>
-		<td>{{month.adu | number:1}}</td>
-		<td>{{month.hdd | number:0}}</td>
-	</tr>
-</table>
-<p class="notes">All power values in kWh.</p>
-<p class="notes">1. Base 65&deg;F</p>
+<p ng-class="{'alert alert-danger': warning}">{{message}}</p>
+
+<div class="table-responsive">
+	<table id="summary" class="table table-condensed text-right">
+		<tr>
+			<th class="text-right"></th>
+			<th class="text-right">Used</th>
+			<th class="text-right">Solar</th>
+			<th class="text-right">Net</th>
+			<th class="text-right"><abbr title="Average daily usage">ADU</abbr></th>
+			<th class="text-right"><abbr title="Heating Degree Days">HDD</abbr>&sup1;</th>
+		</tr>
+		<tr>
+			<th><abbr title="Year to date">YTD</abbr></th>
+			<th class="text-right">{{data.totals.used | number:0}}</th>
+			<th class="text-right">{{data.totals.solar | number:0}}</th>
+			<th class="text-right">{{data.totals.net | number:0}}</th>
+			<th class="text-right">{{data.totals.adu | number:1}}</th>
+			<th class="text-right">{{data.totals.hdd | number:0}}</th>
+		</tr>
+		<tr ng-repeat="month in data.months">
+			<td class="text-left"><a ng-href="#/daily/netusage?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+			<td>{{month.used | number:0}}</td>
+			<td>{{month.solar | number:0}}</td>
+			<td>{{month.net | number:0}}</td>
+			<td>{{month.adu | number:1}}</td>
+			<td>{{month.hdd | number:0}}</td>
+		</tr>
+	</table>
+</div>
+<p class="small">All power values in <abbr title="Kilowatt hours">kWh</abbr></p>
+<ol class="small">
+	<li>Base 65&deg;F</li>
+<ol>

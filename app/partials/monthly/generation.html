@@ -1,25 +1,30 @@
-<p ng-class="{warning: warning}">{{message}}</p>
-<p><b>Avg. daily generation</b>: {{data.avg_daily_gen}} kWh</p>
-<p><b>Max Wh</b>: {{data.max_solar_hour.kWh}}, Date: <a ng-href="#/daily/generation?date={{data.max_solar_hour.date | date:'yyyy-MM-dd'}}&time={{data.max_solar_hour.date | date:'HH'}}">{{data.max_solar_hour.date | date:"M/d/yyyy h a"}}</a></p>
-<p><b>Max kWh day</b>: {{data.max_solar_day.kWh}}, Date: <a ng-href="#/daily/generation?date={{data.max_solar_day.date | date:'yyyy-MM-dd'}}">{{data.max_solar_day.date | date:"M/d/yyyy"}}</a></p>
-<table id="generation">
-	<tr>
-		<th></th>
-		<th class="label">Actual</th>
-		<th class="label">Estimated</th>
-		<th class="label">Diff(%)</th>
-	</tr>
-	<tr>
-		<th class="name">YTD</th>
-		<th>{{data.totals.actual | number:0}}</th>
-		<th>{{data.totals.estimated | number:0}}</th>
-		<th ng-class="{negative: data.totals.estimated<0, positive: data.totals.estimated>=0}">{{data.totals.diff | number:1}}</th>
-	</tr>
-	<tr ng-repeat="month in data.months">
-		<td class="name"><a ng-href="#/daily/generation?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
-		<td>{{month.actual | number:0}}</td>
-		<td>{{month.estimated | number:0}}</td>
-		<td ng-class="{negative: month.diff<0, positive: month.diff>=0}">{{month.diff | number:1}}</td>
-	</tr>
-</table>
-<p class="notes">All power values in kWh.</p>
+<p ng-class="{'alert alert-danger': warning}">{{message}}</p>
+
+<dl class="dl-horizontal">
+	<dt>Avg. daily generation</dt><dd>{{data.avg_daily_gen}} <abbr title="Kilowatt hours">kWh</abbr></dd>
+	<dt>Max Wh</dt><dd>{{data.max_solar_hour.kWh}}, Date: <a ng-href="#/daily/generation?date={{data.max_solar_hour.date | date:'yyyy-MM-dd'}}&time={{data.max_solar_hour.date | date:'HH'}}">{{data.max_solar_hour.date | date:"M/d/yyyy h a"}}</a></dd>
+	<dt>Max kWh day</dt><dd>{{data.max_solar_day.kWh}}, Date: <a ng-href="#/daily/generation?date={{data.max_solar_day.date | date:'yyyy-MM-dd'}}">{{data.max_solar_day.date | date:"M/d/yyyy"}}</a></dd>
+</dl>
+<div class="table-responsive">
+	<table id="generation" class="table table-condensed text-right">
+		<tr>
+			<th></th>
+			<th class="text-right">Actual</th>
+			<th class="text-right">Estimated</th>
+			<th class="text-right">Diff(%)</th>
+		</tr>
+		<tr>
+			<th class="text-left">YTD</th>
+			<th class="text-right">{{data.totals.actual | number:0}}</th>
+			<th class="text-right">{{data.totals.estimated | number:0}}</th>
+			<th class="text-right" ng-class="{'text-danger': data.totals.estimated<0, 'text-success': data.totals.estimated>=0}">{{data.totals.diff | number:1}}</th>
+		</tr>
+		<tr ng-repeat="month in data.months">
+			<td class="text-left"><a ng-href="#/daily/generation?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+			<td>{{month.actual | number:0}}</td>
+			<td>{{month.estimated | number:0}}</td>
+			<td ng-class="{'text-danger': month.diff<0, 'text-success': month.diff>=0}">{{month.diff | number:1}}</td>
+		</tr>
+	</table>
+</div>
+<p class="small">All power values in <abbr title="Kilowatt hours">kWh</abbr></p>
