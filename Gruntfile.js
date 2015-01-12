@@ -133,7 +133,7 @@ module.exports = function(grunt) {
 					'app/css/*',
 					'app/index.html'
 				],
-				dest: '../../home-performance-ang/'
+				dest: '<%= gitDest %>'
 			}
 		},
 		preprocess: {

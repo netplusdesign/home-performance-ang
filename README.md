@@ -11,6 +11,7 @@ See working prototype at [netplusdesign](http://netplusdesign.com/app)
 * Momentjs
 * Highcharts
 * Chroma
+* Bootstrap
 
 First get Node, Grunt and Bower.
 
