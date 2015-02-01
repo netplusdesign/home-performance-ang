@@ -28,5 +28,4 @@ Database setup scripts can be found in the [home-performance-charting](https://g
 
 ## What's next
 
-* A version using Twitter Bootstrap is almost done.
-* Also currently working on a rewrite of the entire backend using Flask and SQLAlchemy to create a RESTful API.
+* Currently working on a rewrite of the entire backend using Flask and SQLAlchemy to create a RESTful API.
